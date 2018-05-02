@@ -1,0 +1,101 @@
+﻿@model UI.Models.SearchViewModel
+@{
+    ViewBag.Title = "学践网-搜索";
+}
+
+@section style{
+ 
+
+}
+<section style="width: 85%; margin: 30px auto;padding-bottom: 180px;">
+    <div class="leftbox" style="width: 67%;">
+        <div class="leftbox1">
+            <div class="leftbox_1" style="width: 750px;">
+                <div class="postdetail">
+                    <div id="ltvpostdetail">
+                        <div class="nowarea">
+                            <h3>搜索"@Session["Search"]"的结果</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+@foreach (var item in Model.Activities)
+{
+    <div class="leftbox_1 lactivities" style="width: 750px;">
+        <a href="@Url.Action("#Details", "#", new {ActId = item.ActId})">
+            <div class="ltitle"><span style="color: rgba(1, 1, 1, 0.5); margin: 0 10px;">[兼职信息]</span>@item.ActContent</div>
+            <div style="color: rgba(1, 1, 1, 0.7); margin: 10px 0; height: 135px; overflow: hidden;">@Html.Raw(@item.ActContent)</div>
+        </a>
+    </div>
+}
+@foreach (var item in Model.Categories)
+{
+    <div class="leftbox_1 lactivities" style="width: 750px;">
+        <a href="@Url.Action("#Details", "#", new {CategoryId = item.CategoryId})">
+            <div class="ltitle"><span style="color: rgba(1, 1, 1, 0.5); margin: 0 10px;">[分类信息]</span>@item.CategoryName</div>
+            <div style="color: rgba(1, 1, 1, 0.7); margin: 10px 0; height: 135px; overflow: hidden;">@Html.Raw(@item.CategoryName)</div>
+        </a>
+    </div>
+}
+            </div>
+            </div>
+        </div>
+
+    <div class="rightbox">
+        <div class="rightbody">
+            <span>信息筛选</span>
+            <div id="rightbody-bottom">
+                <div>
+                    <div class="n9">全部</div>
+    <div id="first">
+    <div class="n1">室内达人</div>
+    <div class="n2">演艺技能</div>
+    </div>
+
+    <div id="second">
+    <div class="n3">简单易做</div>
+    <div class="n4">跑腿办事</div>
+    </div>
+    
+    <div id="third">
+    <div class="n5">优秀青年</div>
+    <div class="n6">游戏代练</div>
+    </div>
+
+    <div id="fourth">
+    <div class="n7">活动策划</div>
+    <div class="n8">海报设计</div>
+    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @*<div class="rightbox" skground-color: #fff;box-shadow: 0 0 4px #cecccc;-webkit-box-shadow: 0 0 4px #cecccc;">
+        <div class="tuijian" style="margin: 20px auto; overflow: hidden; border-top: 3px solid #e2d537;">
+            <span style="width: 100%; display: block; font-size: 17px; text-align: center; margin-top: 10px; font-size: 17px; color: #333; font-weight: 700; padding-bottom: 5px;">信息筛选</span>
+            <div id="ltvtuijian">
+                <div style="width: 100%;">
+                    <div class="choosed c9" style="width: 250px; margin: 15px auto;background-color:rgba(211, 59, 68,0.8); color: black; ">全部</div>
+                    <div style="width: 250px; margin: 15px auto;">
+                        <div class="choosed c1" style="display: inline-block; background-color: rgba(144,202,175,0.8);">室内达人</div>
+                        <div class="choosed c2" style="display: inline-block;margin-left: 25px; background-color: rgba(100, 147, 175,0.8);">演艺技能</div>
+                    </div>
+                    <div style="width: 250px; margin: 15px auto;">
+                        <div class="choosed c3" style="display: inline-block; background-color: rgba(215, 193, 107, 0.8);">简单易做</div>
+                        <div class="choosed c4" style="display: inline-block;margin-left: 25px; background-color: rgba(208, 133, 61, 0.8);">跑腿办事</div>
+                    </div>
+                    <div style="width: 250px; margin: 15px auto;">
+                        <div class="choosed c5" style="display: inline-block; background-color: rgba(171,150,197,0.8);">优秀青年</div>
+                        <div class="choosed c6" style="display: inline-block;margin-left: 25px; background-color: rgba(121,61,86,0.8);">游戏代练</div>
+                    </div>
+                    <div style="width: 250px; margin: 15px auto;">
+                        <div class="choosed c7" style="display: inline-block; background-color: rgba(147,162,169,0.8);">活动策划</div>
+                        <div class="choosed c8" style="display: inline-block;margin-left: 25px; background-color: rgba(84,107,131,0.8);">海报设计</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+</section>

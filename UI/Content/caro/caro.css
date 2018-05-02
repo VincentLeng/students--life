@@ -1,0 +1,114 @@
+﻿/**
+    轮播图样式
+*/
+.soso-caro {
+  height: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-top: 5px;
+  position: relative;
+}
+
+.soso-caro:before {
+  content: '';
+  display: block;
+  padding-top: 69%;
+}
+
+@media (max-width: 768px) {
+  .soso-caro {
+    width: 100%;
+  }
+}
+
+.soso-caro div.item {
+  font-size: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: opacity 1s linear;
+  transition: opacity 1s linear;
+}
+
+.soso-caro div.item a {
+  display: block;
+  height: 100%;
+}
+
+.soso-caro div.item a img {
+  max-width: 100%;
+  height: 100%;
+  border-radius: 0 0 15px 15px;
+  padding: 0;
+  margin: 0 auto;
+  display: inherit;
+}
+
+.soso-caro div.active {
+  opacity: 1;
+}
+
+.soso-caro .caro-ctrl {
+  display: none;
+  position: absolute;
+  top: 42%;
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.soso-caro .caro-ctrl [class*="icon-ctrl-"] {
+  width: 12px;
+  height: 12px;
+  display: inherit;
+  border-top: 3px solid #fff;
+}
+
+.soso-caro .caro-ctrl .icon-ctrl-left {
+  border-left: 3px solid #fff;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.soso-caro .caro-ctrl .icon-ctrl-right {
+  border-right: 3px solid #fff;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.soso-caro .ctrl-left {
+  left: 0;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.soso-caro .ctrl-right {
+  right: 0;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.soso-caro .caro-index {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  text-align: center;
+}
+
+.soso-caro .caro-index .index {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  border: 2px solid #6d97ab;
+}
+
+.soso-caro .caro-index .active {
+  background-color: #6d97ab;
+  -webkit-box-shadow: 0 0 3px #888;
+          box-shadow: 0 0 3px #888;
+}

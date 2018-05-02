@@ -1,0 +1,79 @@
+﻿@model UI.Models.HomeIndexViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Content/caro/caro.css"> 
+    <link href="~/Content/carobottomcss/StyleSheet1.css" rel="stylesheet" />
+}
+<div id="page">
+    <!-- 轮播 -->
+    <div class="soso-caro">
+        <!-- 轮播项目 -->
+        <div class="item active">
+            <a href="#">
+                <img src="~/Images/Home/01.jpg" alt="caro-img-1">
+            </a>
+        </div>
+        <div class="item">
+            <a href="#">
+                <img src="~/Images/Home/02.jpg" alt="caro-img-2">
+            </a>
+        </div>
+        <div class="item">
+            <a href="#">
+                <img src="~/Images/Home/03.jpg" alt="caro-img-3">
+            </a>
+        </div>
+        <!-- 轮播控制 -->
+        <a class="caro-ctrl ctrl-left" href="javascript:void(0);">
+            <i class="icon-ctrl-left"></i>
+        </a>
+        <a class="caro-ctrl ctrl-right" href="javascript:void(0);">
+            <i class="icon-ctrl-right"></i>
+        </a>
+        <!-- 轮播指标 -->
+        <div class="caro-index">
+            <span class="index active"></span>
+            <span class="index"></span>
+            <span class="index"></span>
+        </div>
+    </div>   
+    <div id="bottom">
+        <div class="col-md-4">
+            <h2 class="font-effect-shadow-multiple">热门动态</h2>
+            @foreach (var item in Model.Dynamics)
+            {
+                    <p>
+                        <a  href="#">@item.DynamicContent</a> 
+                    </p>
+            }
+            <p><a class="btn btn-default" href="#">了解更多信息 &raquo;</a></p>
+        </div>
+        
+        <div class="col-md-4">
+            <h2 class="font-effect-shadow-multiple">兼职达人</h2>
+            @foreach (var item in Model.Users)
+            {
+                <p>
+                   <a href="#">@item.UserName</a>
+                </p>
+            }
+            <p><a class="btn btn-default" href="#">了解更多信息 &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2 class="font-effect-shadow-multiple">热门兼职</h2>
+            @foreach (var item in Model.Activities)
+            {
+                <p>
+                    <a href="#"> @item.ActContent</a>
+
+                </p>
+            }
+            <p><a class="btn btn-default" href="#">了解更多信息 &raquo;</a></p>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="~/Content/caro/caro.js"></script>
+}
