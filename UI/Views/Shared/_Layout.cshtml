@@ -48,7 +48,11 @@
                     <li style="margin-right: 0px;">
                         <a href="javascript:void(0)" class="nav_search">
                             <span id="search-btn" class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                            <input style="border:0;width:0;transition:width .3s;" id="search-text" type="text" name="" value="" />
+                            @using (Html.BeginForm("Index","Search", FormMethod.Post, new { style = "display:inline-block;" }))
+                            {
+                                <input style="border:0;width:0;transition:width .3s;" id="search-text" type="text" name="" value="" />
+                            }
+                           <!--加入form表单，把搜索的数据传输过去-->
                         </a>
                         <script>
                             var searchBtn = document.getElementById('search-btn');
@@ -60,6 +64,7 @@
                                 clicked = !clicked;
                             });
                         </script>
+                        <!--js代码实现点击搜索按钮实现搜索框弹出-->
                     </li>              
                 </ul>
                 @Html.Partial("_LoginPartial")

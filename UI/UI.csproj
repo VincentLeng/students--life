@@ -325,6 +325,7 @@
     <Content Include="Content\caro\caro.css" />
     <Content Include="Content\caro\caro.js" />
     <Content Include="Content\carobottomcss\StyleSheet1.css" />
+    <Content Include="Content\search\search.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

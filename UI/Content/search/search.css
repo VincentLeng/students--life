@@ -1,0 +1,121 @@
+﻿body {
+}
+section{
+    width: 85%; 
+    margin: 30px auto;
+    padding-bottom: 180px;
+}
+.leftbox{
+    width: 67%;
+}
+.leftbox_1{
+    width:750px;
+}
+.leftbox_1 lactivities{
+     width:750px;
+}
+.little1{
+    color: rgba(1, 1, 1, 0.5); 
+    margin: 0 10px;
+}
+.little1_1{
+    color: rgba(1, 1, 1, 0.7); 
+    margin: 10px 0; 
+    height: 135px; 
+    overflow: hidden;
+}
+.leftbox_1 lcategories{
+    width:750px;
+}
+.little2{
+    color: rgba(1, 1, 1, 0.5);
+     margin: 0 10px;
+}
+.little2_2{
+    color: rgba(1, 1, 1, 0.7); 
+    margin: 10px 0; 
+    height: 135px; 
+    overflow: hidden;
+}
+.rightbox{
+    box-shadow:0 0 4px #cecccc;
+    -webkit-box-shadow:0 0 4px #cecccc;
+    width: 33%;
+}
+.rightbody{
+    margin: 20px auto; 
+    overflow: hidden; 
+    border-top: 3px solid #e2d537;
+}
+span{
+    width: 100%; 
+    display: block;
+     font-size: 17px; 
+     text-align: center; 
+     margin-top: 10px; 
+     font-size: 17px; 
+     color: #333; 
+     font-weight: 700; 
+     padding-bottom: 5px;
+}
+#rightbody-bottom{
+    width: 100%;
+}
+.n9{
+    width: 250px; 
+    margin: 15px auto;
+    background-color:rgba(211, 59, 68,0.8); 
+    color: black;
+}
+#first{
+    width: 250px; 
+    margin: 15px auto;
+}
+.n1{
+    display: inline-block;
+     background-color: rgba(144,202,175,0.8);
+}
+.n2{
+    display: inline-block;
+    margin-left: 25px;
+    background-color: rgba(100, 147, 175,0.8);
+}
+#second{
+    width: 250px; 
+    margin: 15px auto;
+}
+.n3{
+    display: inline-block;
+     background-color: rgba(215, 193, 107, 0.8);
+}
+.n4{
+    display: inline-block;
+    margin-left: 25px; 
+    background-color: rgba(208, 133, 61, 0.8);
+}
+#third{
+    width: 250px; 
+    margin: 15px auto;
+}
+.n5{
+    display: inline-block; 
+    background-color: rgba(171,150,197,0.8);
+}
+.n6{
+    display: inline-block;
+    margin-left: 25px; 
+    background-color: rgba(121,61,86,0.8);
+}
+#fourth{
+    width: 250px;
+    margin: 15px auto;
+}
+.n7{
+    display: inline-block; 
+    background-color: rgba(147,162,169,0.8);
+}
+.n8{
+    display: inline-block;
+    margin-left: 25px; 
+    background-color: rgba(84,107,131,0.8);
+}
