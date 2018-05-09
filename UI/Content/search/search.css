@@ -1,121 +1,140 @@
 ﻿body {
 }
 section{
-    width: 85%; 
-    margin: 30px auto;
-    padding-bottom: 180px;
-}
-.leftbox{
-    width: 67%;
-}
-.leftbox_1{
-    width:750px;
-}
-.leftbox_1 lactivities{
-     width:750px;
-}
-.little1{
-    color: rgba(1, 1, 1, 0.5); 
-    margin: 0 10px;
-}
-.little1_1{
-    color: rgba(1, 1, 1, 0.7); 
-    margin: 10px 0; 
-    height: 135px; 
-    overflow: hidden;
-}
-.leftbox_1 lcategories{
-    width:750px;
-}
-.little2{
-    color: rgba(1, 1, 1, 0.5);
-     margin: 0 10px;
-}
-.little2_2{
-    color: rgba(1, 1, 1, 0.7); 
-    margin: 10px 0; 
-    height: 135px; 
-    overflow: hidden;
-}
-.rightbox{
-    box-shadow:0 0 4px #cecccc;
-    -webkit-box-shadow:0 0 4px #cecccc;
-    width: 33%;
-}
-.rightbody{
-    margin: 20px auto; 
-    overflow: hidden; 
-    border-top: 3px solid #e2d537;
-}
-span{
-    width: 100%; 
+    width: 85%;
+    margin: 30px auto;   
+    height: 400px;
+    position: relative;
     display: block;
-     font-size: 17px; 
-     text-align: center; 
-     margin-top: 10px; 
-     font-size: 17px; 
-     color: #333; 
-     font-weight: 700; 
-     padding-bottom: 5px;
+    line-height: 1;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    overflow:hidden
 }
-#rightbody-bottom{
+
+/*搜索界面左边盒子css*/
+.leftbox{
+    width: 60%;   
+    height:300px;
+}
+.searching-title{
+    box-sizing: content-box;
+    border: 15px solid #fff;
+    margin: 40px auto 0;
+    -webkit-box-shadow: 0 0 4px #cecccc; 
+}
+.searching-result{   
+   
+    box-sizing: content-box;   
+    border: 15px solid #fff;  
+    margin: 40px auto 0;
+    -webkit-box-shadow: 0 0 4px #cecccc; 
+    padding:0;
+    display: block;
+    font-size:20px;
+}
+
+/*搜索界面右边盒子css，关键是让其浮动跟左边盒子并排在界面上*/
+.rightbox{   
+    width: 28%;
+    display: block;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 4px #cecccc;
+    position: absolute;
+    right: 0px;
+    top: 20px;
+    
+   
+
+}
+.rightbox-top{
     width: 100%;
+    display: block;
+    font-size: 17px;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 17px;
+    color: #333;
+    font-weight: 700;
+    padding-bottom: 5px;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f3;
+}
+
+#list{
+    width: 100%;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f3;
+    display: block;
+
+}
+.choosed{
+    color: white;
+    cursor: pointer;
+    width: 110px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    
+
+}
+.top1{
+  width: 241px; 
+  margin: 15px auto;
+  background-color:rgba(211, 59, 68,0.8);
+  color: black; 
+  text-align:center;
+  height:25px;
 }
 .n9{
-    width: 250px; 
-    margin: 15px auto;
-    background-color:rgba(211, 59, 68,0.8); 
-    color: black;
+    font-size:25px;
 }
-#first{
-    width: 250px; 
-    margin: 15px auto;
-}
-.n1{
+.n1{ 
+  
     display: inline-block;
-     background-color: rgba(144,202,175,0.8);
+    background-color: rgba(144,202,175,0.8); 
+  
+             
 }
 .n2{
-    display: inline-block;
-    margin-left: 25px;
-    background-color: rgba(100, 147, 175,0.8);
-}
-#second{
-    width: 250px; 
-    margin: 15px auto;
+    width:50%;
+   
+    display: inline-block;   
+    background-color: rgba(100, 147, 175,0.8);   
 }
 .n3{
     display: inline-block;
-     background-color: rgba(215, 193, 107, 0.8);
+    background-color: rgba(215, 193, 107, 0.8);     
 }
 .n4{
-    display: inline-block;
-    margin-left: 25px; 
+    width:50%;
+    display: inline-block;  
     background-color: rgba(208, 133, 61, 0.8);
-}
-#third{
-    width: 250px; 
-    margin: 15px auto;
+   
 }
 .n5{
-    display: inline-block; 
+    display: inline-block;
+    width:50%; 
     background-color: rgba(171,150,197,0.8);
 }
 .n6{
     display: inline-block;
-    margin-left: 25px; 
     background-color: rgba(121,61,86,0.8);
-}
-#fourth{
-    width: 250px;
-    margin: 15px auto;
+   
 }
 .n7{
+    width:50%;
     display: inline-block; 
-    background-color: rgba(147,162,169,0.8);
+    background-color: rgba(147,162,169,0.8);    
 }
 .n8{
     display: inline-block;
-    margin-left: 25px; 
     background-color: rgba(84,107,131,0.8);
 }

@@ -7,67 +7,59 @@
     <link href="~/Content/search/search.css" rel="stylesheet" />
 }
 <section>
-    <div class="leftbox">
-        <div class="leftbox1">
-            <div class="leftbox_1">
-                <div class="postdetail">
-                    <div id="ltvpostdetail">
-                        <div class="nowarea">
-                            <h3>搜索"@Session["Search"]" 的结果</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
+    <!--搜索界面左边-->
+    <div class="leftbox">                                               
+         <div class="searching-title">
+              <h2>搜索"@Session["Search"]" 的结果</h2>
+         </div>                               
+            <div class="searching-result">
 @foreach (var item in Model.Activities)
 {
-    <div class="leftbox_1 lactivities" >
+    <div class="activities-content" >
         <a href="@Url.Action("#Details", "#", new {ActId = item.ActId})">
-            <div class="ltitle1"><span>[兼职信息]</span>@item.ActContent</div>
-            <div  class="little1_1">@Html.Raw(@item.ActContent)</div>
+            @item.ActContent
         </a>
+        @foreach (var cate in Model.Categories)
+        {
+            if (cate.ActId == item.ActId)
+            {
+                <span style="background-color:#e6e6e6;border-radius:3px;"><a style="color:black" href="#">@cate.CategoryName</a></span>
+            }
+        }
     </div>
 }
-@foreach (var item in Model.Categories)
-{
-    <div class="leftbox_1 lcategories">
-        <a href="@Url.Action("#Details", "#", new {CategoryId = item.CategoryId})">
-            <div class="ltitle2"><span>[分类信息]</span>@item.CategoryName</div>
-            <div class="little2_2">@Html.Raw(@item.CategoryName)</div>
-        </a>
-    </div>
-}
+</div>
+</div>
+       <!--搜索界面右边-->
+    <div class="rightbox">       
+            <div class="rightbox-top">
+            <h3>信息筛选</h3>
             </div>
-            </div>
-        </div>
+            <div style="width:100%">
 
-    <div class="rightbox">
-        <div class="rightbody">
-            <span>信息筛选</span>
-            <div id="rightbody-bottom">
-                <div>
-                    <div class="n9">全部</div>
-    <div id="first">
-    <div class="n1">室内达人</div>
-    <div class="n2">演艺技能</div>
-    </div>
-
-    <div id="second">
-    <div class="n3">简单易做</div>
-    <div class="n4">跑腿办事</div>
-    </div>
-    
-    <div id="third">
-    <div class="n5">优秀青年</div>
-    <div class="n6">游戏代练</div>
-    </div>
-
-    <div id="fourth">
-    <div class="n7">活动策划</div>
-    <div class="n8">海报设计</div>
-    </div>
+                <div id="list">
+                        <div class="top1">
+                    <div class="n9">全部</div>               
+                </div>             
+                      <div style="width:250px; margin:15px auto;">
+                            <div class="choosed n1">室内达人</div>
+                            <div class="choosed n2">演艺技能</div>                                 
+                      </div>
+                    <div  style="width:250px; margin:15px auto;">
+                            <div class="choosed n3">简单易做</div>
+                            <div class="choosed n4">跑腿办事</div>              
+                    </div>
+                    <div  style="width:250px; margin:15px auto;">
+                            <div class="choosed n5">优秀青年</div>
+                            <div class="choosed n6">游戏代练</div>
+                    </div>
+                    <div  style="width:250px; margin:15px auto;">
+                            <div class="choosed n7">活动策划</div>
+                            <div class="choosed n8">海报设计</div>
+                    </div>
+                       
                 </div>
             </div>
-        </div>
-    </div>
+                    </div>
+                                 
 </section>
