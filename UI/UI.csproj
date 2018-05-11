@@ -330,6 +330,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\L-R images\01.jpg" />
     <Content Include="images\RegisterLogin\dengluzhuce.jpg" />
     <Content Include="images\home\01.jpg" />
     <Content Include="images\home\02.jpg" />

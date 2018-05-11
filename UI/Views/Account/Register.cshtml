@@ -2,6 +2,16 @@
 @{
     ViewBag.Title = "注册";
 }
+@section styles {
+    <style>
+        body {
+            background: url(http://p1.so.qhimgs1.com/t0137eb362c754a7dad.jpg) no-repeat;
+            background-size: cover;
+        }
+    </style>
+}
+
+<div id="Register-page">
 
 <h2 style="text-align:center">@ViewBag.Title</h2>
 
@@ -35,6 +45,7 @@
         </div>
     </div>
 }
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
