@@ -8,12 +8,12 @@ using Model;
 
 namespace BLL
 {
-   public partial class ReplyCommentsBLL:BaseBLL<ReplyComments>
+   public partial class ReplyBLL:BaseBLL<Reply>
     {
         TaskEntities DbContext = new TaskEntities();
-        public override BaseDAL<ReplyComments> GetDAL()
+        public override BaseDAL<Reply> GetDAL()
         {
-            return new ReplyCommentsDAL();
+            return new DAL.ReplyDAL();
         }
     }
 }

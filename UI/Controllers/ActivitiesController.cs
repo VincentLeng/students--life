@@ -2,27 +2,25 @@
 using Model;
 using BLL;
 using System.Linq;
+using DAL;
 
 namespace UI.Controllers
 {
     public class ActivitiesController : Controller
     {
-        ActivitiesBLL activitiesBll = new ActivitiesBLL();
+        ActivitiesBLL activitiesBLL = new ActivitiesBLL();
+        CategoriesBLL categoriesBLL = new CategoriesBLL();
+        ImagesBLL imagesBLL = new ImagesBLL();
         // GET: Activities
         public ActionResult Index()
         {
-           ViewData.Model= activitiesBll.GetList(10, 1);//主页一页放十条，分页
-            return View();
-        }
-        public ActionResult Add()
-        {
-            return View();
-        }
-        public ActionResult Add(Activities activities)
-        {
-            activitiesBll.Add(activities);
-            return Redirect(Url.Action("Index"));
-        }
-
+            var categories = categoriesBLL.GetDAL().GetALL();
+            var activities = activitiesBLL.GetDAL().GetList(10, 1);
+             //主页一页放十条，分页
+            Models.ActivitiesViewModel acvm = new Models.ActivitiesViewModel();
+            acvm.Activities = activities;
+            acvm.Categories = categories;
+            return View(acvm);
+        }    
     }
 }

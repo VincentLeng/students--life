@@ -17,7 +17,8 @@ namespace Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ReplyComments()
         {
-            this.ReplyComments1 = new HashSet<ReplyComments>();
+            this.Comments = new HashSet<Comments>();
+            this.Users = new HashSet<Users>();
         }
     
         public int ReplyId { get; set; }
@@ -27,7 +28,8 @@ namespace Model
         public System.DateTime ReplyTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReplyComments> ReplyComments1 { get; set; }
-        public virtual ReplyComments ReplyComments2 { get; set; }
+        public virtual ICollection<Comments> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Users> Users { get; set; }
     }
 }

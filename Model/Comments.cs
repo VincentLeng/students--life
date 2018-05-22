@@ -17,17 +17,19 @@ namespace Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Comments()
         {
-            this.Comments1 = new HashSet<Comments>();
+            this.Reply = new HashSet<Reply>();
         }
     
         public int ComId { get; set; }
         public System.DateTime ComTime { get; set; }
         public string ComContent { get; set; }
-        public int UserId { get; set; }
-        public int DynamicId { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<int> DynId { get; set; }
+        public Nullable<int> ReplyId { get; set; }
     
+        public virtual Dynamics Dynamics { get; set; }
+        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comments> Comments1 { get; set; }
-        public virtual Comments Comments2 { get; set; }
+        public virtual ICollection<Reply> Reply { get; set; }
     }
 }

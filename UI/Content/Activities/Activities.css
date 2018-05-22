@@ -1,0 +1,41 @@
+﻿body {
+}
+section{
+    
+}
+#activities-page-top{
+    border-bottom: solid 1px #fc0;
+    font-size:20px;
+    
+    
+}
+#activities-page-top ul{
+    display:inline-block;
+}
+#activities-page-top ul li{
+    display:inline;
+    
+}
+#activities-page-top a{
+    color:#000000;
+}
+#activities-page-bottom{
+    padding-top:20px;
+    background-color: #fff;
+    margin: 0;
+    font-size:20px;
+    display: block;
+    clear: both;
+}
+#activities-page-bottom ul{
+    list-style:none;
+    height:100px;
+    background-color:antiquewhite;
+    line-height:100px;
+}
+#activities-page-bottom ul li{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+     
+}

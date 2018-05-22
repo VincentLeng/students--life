@@ -8,16 +8,16 @@ using Model;
 
 namespace DAL
 {
-    public partial class ReplyCommentsDAL:BaseDAL<ReplyComments>
-    {
-        TaskEntities DbContext = new TaskEntities();
+    public partial class ReplyDAL:BaseDAL<Reply>
+    {        
+        TaskEntities DBContext = new TaskEntities();
 
-        public override Expression<Func<ReplyComments, bool>> GetByIdKey(int id)
+        public override Expression<Func<Reply, bool>> GetByIdKey(int id)
         {
             return u => u.ReplyId == id;
         }
 
-        public override Expression<Func<ReplyComments, int>> GetKey()
+        public override Expression<Func<Reply, int>> GetKey()
         {
             return u => u.ReplyId;
         }

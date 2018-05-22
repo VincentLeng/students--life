@@ -4,20 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f7cabf524e304284b12fd7a6c7578685" Name="Diagram1">
-        <EntityTypeShape EntityType="TaskModel.Activities" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TaskModel.Comments" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TaskModel.Dynamics" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TaskModel.Managers" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TaskModel.ReplyComments" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TaskModel.Users" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TaskModel.Categories" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TaskModel.Images" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
-        <AssociationConnector Association="TaskModel.FK_Activities_Activities" ManuallyRouted="false" />
-        <AssociationConnector Association="TaskModel.FK_Comments_Comments" ManuallyRouted="false" />
-        <AssociationConnector Association="TaskModel.FK_Dynamics_Dynamics" ManuallyRouted="false" />
-        <AssociationConnector Association="TaskModel.FK_ReplyComments_ReplyComments" ManuallyRouted="false" />
-        <AssociationConnector Association="TaskModel.FK_Users_Users1" ManuallyRouted="false" />
+      <Diagram DiagramId="5183af6cb2554e28be81d531280df1cf" Name="Diagram1">
+        <EntityTypeShape EntityType="TaskModel.Activities" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskModel.Categories" Width="1.5" PointX="2.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskModel.Comments" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskModel.Dynamics" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskModel.Images" Width="1.5" PointX="4.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskModel.Managers" Width="1.5" PointX="6.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskModel.Receive" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskModel.Reply" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskModel.Users" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="TaskModel.FK_Receive_Activities" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskModel.FK_Comments_Dynamics" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskModel.FK_Comments_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskModel.FK_Reply_Comments" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskModel.FK_Dynamics_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskModel.FK_Receive_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskModel.FK_Reply_Users" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,24 +4,21 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TaskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TaskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activities">
           <Key>
             <PropertyRef Name="ActId" />
           </Key>
-          <Property Name="ActId" Type="int" Nullable="false" />
+          <Property Name="ActId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="ActContent" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="CategoryId" Type="int" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“Task.dbo.Categories”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="CategoryId" />
-            <PropertyRef Name="ActId" />
-            <PropertyRef Name="CategoryName" />
           </Key>
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="ActId" Type="int" Nullable="false" />
@@ -34,8 +31,9 @@
           <Property Name="ComId" Type="int" Nullable="false" />
           <Property Name="ComTime" Type="datetime" Nullable="false" />
           <Property Name="ComContent" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="DynamicId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="DynId" Type="int" />
+          <Property Name="ReplyId" Type="int" />
         </EntityType>
         <EntityType Name="Dynamics">
           <Key>
@@ -48,12 +46,9 @@
           <Property Name="DynamicContent" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DynamicTime" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“Task.dbo.Images”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Images">
           <Key>
             <PropertyRef Name="ImageId" />
-            <PropertyRef Name="Address" />
           </Key>
           <Property Name="ImageId" Type="int" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
@@ -66,15 +61,33 @@
           <Property Name="ManagerName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="ReplyComments">
+        <EntityType Name="Receive">
+          <Key>
+            <PropertyRef Name="ReceiveId" />
+          </Key>
+          <Property Name="ReceiveId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ActId" Type="int" />
+          <Property Name="ReceiveContent" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Reply">
           <Key>
             <PropertyRef Name="ReplyId" />
           </Key>
           <Property Name="ReplyId" Type="int" Nullable="false" />
-          <Property Name="ComId" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="ReplyContent" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ReplyTime" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ComId" Type="int" />
+          <Property Name="ReplyContent" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -85,109 +98,138 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserImage" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActId" Type="int" />
+          <Property Name="ReplyId" Type="int" />
+          <Property Name="DynId" Type="int" />
+          <Property Name="ComId" Type="int" />
         </EntityType>
-        <Association Name="FK_Activities_Activities">
-          <End Role="Activities" Type="Self.Activities" Multiplicity="1" />
-          <End Role="Activities1" Type="Self.Activities" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Activities">
-              <PropertyRef Name="ActId" />
-            </Principal>
-            <Dependent Role="Activities1">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comments_Comments">
-          <End Role="Comments" Type="Self.Comments" Multiplicity="1" />
-          <End Role="Comments1" Type="Self.Comments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Comments">
-              <PropertyRef Name="ComId" />
-            </Principal>
-            <Dependent Role="Comments1">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Dynamics_Dynamics">
-          <End Role="Dynamics" Type="Self.Dynamics" Multiplicity="1" />
-          <End Role="Dynamics1" Type="Self.Dynamics" Multiplicity="*" />
+        <Association Name="FK_Comments_Dynamics">
+          <End Role="Dynamics" Type="Self.Dynamics" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dynamics">
               <PropertyRef Name="DynId" />
             </Principal>
-            <Dependent Role="Dynamics1">
-              <PropertyRef Name="UserId" />
+            <Dependent Role="Comments">
+              <PropertyRef Name="DynId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ReplyComments_ReplyComments">
-          <End Role="ReplyComments" Type="Self.ReplyComments" Multiplicity="1" />
-          <End Role="ReplyComments1" Type="Self.ReplyComments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ReplyComments">
-              <PropertyRef Name="ReplyId" />
-            </Principal>
-            <Dependent Role="ReplyComments1">
-              <PropertyRef Name="ComId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Users_Users1">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Users1" Type="Self.Users" Multiplicity="0..1" />
+        <Association Name="FK_Comments_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="Users1">
+            <Dependent Role="Comments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dynamics_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Dynamics" Type="Self.Dynamics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Dynamics">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receive_Activities">
+          <End Role="Activities" Type="Self.Activities" Multiplicity="0..1" />
+          <End Role="Receive" Type="Self.Receive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activities">
+              <PropertyRef Name="ActId" />
+            </Principal>
+            <Dependent Role="Receive">
+              <PropertyRef Name="ActId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receive_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Receive" Type="Self.Receive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Receive">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reply_Comments">
+          <End Role="Comments" Type="Self.Comments" Multiplicity="0..1" />
+          <End Role="Reply" Type="Self.Reply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comments">
+              <PropertyRef Name="ComId" />
+            </Principal>
+            <Dependent Role="Reply">
+              <PropertyRef Name="ComId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reply_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Reply" Type="Self.Reply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Reply">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="TaskModelStoreContainer">
           <EntitySet Name="Activities" EntityType="Self.Activities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dynamics" EntityType="Self.Dynamics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReplyComments" EntityType="Self.ReplyComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receive" EntityType="Self.Receive" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reply" EntityType="Self.Reply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Categories" EntityType="Self.Categories" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Categories].[CategoryId] AS [CategoryId], 
-    [Categories].[ActId] AS [ActId], 
-    [Categories].[CategoryName] AS [CategoryName]
-    FROM [dbo].[Categories] AS [Categories]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Images" EntityType="Self.Images" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Images].[ImageId] AS [ImageId], 
-    [Images].[Address] AS [Address]
-    FROM [dbo].[Images] AS [Images]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_Activities_Activities" Association="Self.FK_Activities_Activities">
-            <End Role="Activities" EntitySet="Activities" />
-            <End Role="Activities1" EntitySet="Activities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comments_Comments" Association="Self.FK_Comments_Comments">
-            <End Role="Comments" EntitySet="Comments" />
-            <End Role="Comments1" EntitySet="Comments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Dynamics_Dynamics" Association="Self.FK_Dynamics_Dynamics">
+          <AssociationSet Name="FK_Comments_Dynamics" Association="Self.FK_Comments_Dynamics">
             <End Role="Dynamics" EntitySet="Dynamics" />
-            <End Role="Dynamics1" EntitySet="Dynamics" />
+            <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK_ReplyComments_ReplyComments" Association="Self.FK_ReplyComments_ReplyComments">
-            <End Role="ReplyComments" EntitySet="ReplyComments" />
-            <End Role="ReplyComments1" EntitySet="ReplyComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_Users1" Association="Self.FK_Users_Users1">
+          <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
             <End Role="Users" EntitySet="Users" />
-            <End Role="Users1" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dynamics_Users" Association="Self.FK_Dynamics_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Dynamics" EntitySet="Dynamics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receive_Activities" Association="Self.FK_Receive_Activities">
+            <End Role="Activities" EntitySet="Activities" />
+            <End Role="Receive" EntitySet="Receive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receive_Users" Association="Self.FK_Receive_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Receive" EntitySet="Receive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reply_Comments" Association="Self.FK_Reply_Comments">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="Reply" EntitySet="Reply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reply_Users" Association="Self.FK_Reply_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reply" EntitySet="Reply" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TaskModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -195,13 +237,21 @@
           <Key>
             <PropertyRef Name="ActId" />
           </Key>
-          <Property Name="ActId" Type="Int32" Nullable="false" />
+          <Property Name="ActId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="ActContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Activities1" Relationship="Self.FK_Activities_Activities" FromRole="Activities" ToRole="Activities1" />
-          <NavigationProperty Name="Activities2" Relationship="Self.FK_Activities_Activities" FromRole="Activities1" ToRole="Activities" />
+          <Property Name="CategoryId" Type="Int32" />
+          <NavigationProperty Name="Receive" Relationship="Self.FK_Receive_Activities" FromRole="Activities" ToRole="Receive" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="ActId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Comments">
           <Key>
@@ -210,10 +260,12 @@
           <Property Name="ComId" Type="Int32" Nullable="false" />
           <Property Name="ComTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ComContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="DynamicId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Comments1" Relationship="Self.FK_Comments_Comments" FromRole="Comments" ToRole="Comments1" />
-          <NavigationProperty Name="Comments2" Relationship="Self.FK_Comments_Comments" FromRole="Comments1" ToRole="Comments" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="DynId" Type="Int32" />
+          <Property Name="ReplyId" Type="Int32" />
+          <NavigationProperty Name="Dynamics" Relationship="Self.FK_Comments_Dynamics" FromRole="Comments" ToRole="Dynamics" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Comments_Users" FromRole="Comments" ToRole="Users" />
+          <NavigationProperty Name="Reply" Relationship="Self.FK_Reply_Comments" FromRole="Comments" ToRole="Reply" />
         </EntityType>
         <EntityType Name="Dynamics">
           <Key>
@@ -225,8 +277,15 @@
           <Property Name="ReplyComId" Type="Int32" Nullable="false" />
           <Property Name="DynamicContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DynamicTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Dynamics1" Relationship="Self.FK_Dynamics_Dynamics" FromRole="Dynamics" ToRole="Dynamics1" />
-          <NavigationProperty Name="Dynamics2" Relationship="Self.FK_Dynamics_Dynamics" FromRole="Dynamics1" ToRole="Dynamics" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Dynamics" FromRole="Dynamics" ToRole="Comments" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Dynamics_Users" FromRole="Dynamics" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="Managers">
           <Key>
@@ -236,17 +295,37 @@
           <Property Name="ManagerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="ReplyComments">
+        <EntityType Name="Receive">
+          <Key>
+            <PropertyRef Name="ReceiveId" />
+          </Key>
+          <Property Name="ReceiveId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ActId" Type="Int32" />
+          <Property Name="ReceiveContent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Activities" Relationship="Self.FK_Receive_Activities" FromRole="Receive" ToRole="Activities" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Receive_Users" FromRole="Receive" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Reply">
           <Key>
             <PropertyRef Name="ReplyId" />
           </Key>
           <Property Name="ReplyId" Type="Int32" Nullable="false" />
-          <Property Name="ComId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="ReplyContent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ReplyTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="ReplyComments1" Relationship="Self.FK_ReplyComments_ReplyComments" FromRole="ReplyComments" ToRole="ReplyComments1" />
-          <NavigationProperty Name="ReplyComments2" Relationship="Self.FK_ReplyComments_ReplyComments" FromRole="ReplyComments1" ToRole="ReplyComments" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ComId" Type="Int32" />
+          <Property Name="ReplyContent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Reply_Comments" FromRole="Reply" ToRole="Comments" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Reply_Users" FromRole="Reply" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -257,115 +336,138 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Users1" Relationship="Self.FK_Users_Users1" FromRole="Users" ToRole="Users1" />
-          <NavigationProperty Name="Users2" Relationship="Self.FK_Users_Users1" FromRole="Users1" ToRole="Users" />
+          <Property Name="UserImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActId" Type="Int32" />
+          <Property Name="ReplyId" Type="Int32" />
+          <Property Name="DynId" Type="Int32" />
+          <Property Name="ComId" Type="Int32" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Users" FromRole="Users" ToRole="Comments" />
+          <NavigationProperty Name="Dynamics" Relationship="Self.FK_Dynamics_Users" FromRole="Users" ToRole="Dynamics" />
+          <NavigationProperty Name="Receive" Relationship="Self.FK_Receive_Users" FromRole="Users" ToRole="Receive" />
+          <NavigationProperty Name="Reply" Relationship="Self.FK_Reply_Users" FromRole="Users" ToRole="Reply" />
         </EntityType>
-        <EntityType Name="Categories">
-          <Key>
-            <PropertyRef Name="CategoryId" />
-            <PropertyRef Name="ActId" />
-            <PropertyRef Name="CategoryName" />
-          </Key>
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <Property Name="ActId" Type="Int32" Nullable="false" />
-          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Images">
-          <Key>
-            <PropertyRef Name="ImageId" />
-            <PropertyRef Name="Address" />
-          </Key>
-          <Property Name="ImageId" Type="Int32" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_Activities_Activities">
-          <End Role="Activities" Type="Self.Activities" Multiplicity="1" />
-          <End Role="Activities1" Type="Self.Activities" Multiplicity="*" />
+        <Association Name="FK_Receive_Activities">
+          <End Role="Activities" Type="Self.Activities" Multiplicity="0..1" />
+          <End Role="Receive" Type="Self.Receive" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Activities">
               <PropertyRef Name="ActId" />
             </Principal>
-            <Dependent Role="Activities1">
-              <PropertyRef Name="UserId" />
+            <Dependent Role="Receive">
+              <PropertyRef Name="ActId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Comments_Comments">
-          <End Role="Comments" Type="Self.Comments" Multiplicity="1" />
-          <End Role="Comments1" Type="Self.Comments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Comments">
-              <PropertyRef Name="ComId" />
-            </Principal>
-            <Dependent Role="Comments1">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Dynamics_Dynamics">
-          <End Role="Dynamics" Type="Self.Dynamics" Multiplicity="1" />
-          <End Role="Dynamics1" Type="Self.Dynamics" Multiplicity="*" />
+        <Association Name="FK_Comments_Dynamics">
+          <End Role="Dynamics" Type="Self.Dynamics" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dynamics">
               <PropertyRef Name="DynId" />
             </Principal>
-            <Dependent Role="Dynamics1">
-              <PropertyRef Name="UserId" />
+            <Dependent Role="Comments">
+              <PropertyRef Name="DynId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ReplyComments_ReplyComments">
-          <End Role="ReplyComments" Type="Self.ReplyComments" Multiplicity="1" />
-          <End Role="ReplyComments1" Type="Self.ReplyComments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ReplyComments">
-              <PropertyRef Name="ReplyId" />
-            </Principal>
-            <Dependent Role="ReplyComments1">
-              <PropertyRef Name="ComId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Users_Users1">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Users1" Type="Self.Users" Multiplicity="0..1" />
+        <Association Name="FK_Comments_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="Users1">
+            <Dependent Role="Comments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reply_Comments">
+          <End Role="Comments" Type="Self.Comments" Multiplicity="0..1" />
+          <End Role="Reply" Type="Self.Reply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comments">
+              <PropertyRef Name="ComId" />
+            </Principal>
+            <Dependent Role="Reply">
+              <PropertyRef Name="ComId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dynamics_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Dynamics" Type="Self.Dynamics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Dynamics">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receive_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Receive" Type="Self.Receive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Receive">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reply_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Reply" Type="Self.Reply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Reply">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="TaskEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Activities" EntityType="Self.Activities" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
           <EntitySet Name="Comments" EntityType="Self.Comments" />
           <EntitySet Name="Dynamics" EntityType="Self.Dynamics" />
-          <EntitySet Name="Managers" EntityType="Self.Managers" />
-          <EntitySet Name="ReplyComments" EntityType="Self.ReplyComments" />
-          <EntitySet Name="Users" EntityType="Self.Users" />
-          <EntitySet Name="Categories" EntityType="Self.Categories" />
           <EntitySet Name="Images" EntityType="Self.Images" />
-          <AssociationSet Name="FK_Activities_Activities" Association="Self.FK_Activities_Activities">
+          <EntitySet Name="Managers" EntityType="Self.Managers" />
+          <EntitySet Name="Receive" EntityType="Self.Receive" />
+          <EntitySet Name="Reply" EntityType="Self.Reply" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Receive_Activities" Association="Self.FK_Receive_Activities">
             <End Role="Activities" EntitySet="Activities" />
-            <End Role="Activities1" EntitySet="Activities" />
+            <End Role="Receive" EntitySet="Receive" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comments_Comments" Association="Self.FK_Comments_Comments">
-            <End Role="Comments" EntitySet="Comments" />
-            <End Role="Comments1" EntitySet="Comments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Dynamics_Dynamics" Association="Self.FK_Dynamics_Dynamics">
+          <AssociationSet Name="FK_Comments_Dynamics" Association="Self.FK_Comments_Dynamics">
             <End Role="Dynamics" EntitySet="Dynamics" />
-            <End Role="Dynamics1" EntitySet="Dynamics" />
+            <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK_ReplyComments_ReplyComments" Association="Self.FK_ReplyComments_ReplyComments">
-            <End Role="ReplyComments" EntitySet="ReplyComments" />
-            <End Role="ReplyComments1" EntitySet="ReplyComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_Users1" Association="Self.FK_Users_Users1">
+          <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
             <End Role="Users" EntitySet="Users" />
-            <End Role="Users1" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reply_Comments" Association="Self.FK_Reply_Comments">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="Reply" EntitySet="Reply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dynamics_Users" Association="Self.FK_Dynamics_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Dynamics" EntitySet="Dynamics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receive_Users" Association="Self.FK_Receive_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Receive" EntitySet="Receive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reply_Users" Association="Self.FK_Reply_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reply" EntitySet="Reply" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -382,6 +484,16 @@
                 <ScalarProperty Name="ActContent" ColumnName="ActContent" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="TaskModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ActId" ColumnName="ActId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -392,7 +504,8 @@
                 <ScalarProperty Name="ComTime" ColumnName="ComTime" />
                 <ScalarProperty Name="ComContent" ColumnName="ComContent" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="DynamicId" ColumnName="DynamicId" />
+                <ScalarProperty Name="DynId" ColumnName="DynId" />
+                <ScalarProperty Name="ReplyId" ColumnName="ReplyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -408,6 +521,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="TaskModel.Images">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Managers">
             <EntityTypeMapping TypeName="TaskModel.Managers">
               <MappingFragment StoreEntitySet="Managers">
@@ -417,14 +538,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ReplyComments">
-            <EntityTypeMapping TypeName="TaskModel.ReplyComments">
-              <MappingFragment StoreEntitySet="ReplyComments">
-                <ScalarProperty Name="ReplyId" ColumnName="ReplyId" />
-                <ScalarProperty Name="ComId" ColumnName="ComId" />
+          <EntitySetMapping Name="Receive">
+            <EntityTypeMapping TypeName="TaskModel.Receive">
+              <MappingFragment StoreEntitySet="Receive">
+                <ScalarProperty Name="ReceiveId" ColumnName="ReceiveId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActId" ColumnName="ActId" />
+                <ScalarProperty Name="ReceiveContent" ColumnName="ReceiveContent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reply">
+            <EntityTypeMapping TypeName="TaskModel.Reply">
+              <MappingFragment StoreEntitySet="Reply">
+                <ScalarProperty Name="ReplyId" ColumnName="ReplyId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ComId" ColumnName="ComId" />
                 <ScalarProperty Name="ReplyContent" ColumnName="ReplyContent" />
-                <ScalarProperty Name="ReplyTime" ColumnName="ReplyTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TaskModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -436,23 +577,11 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="TaskModel.Categories">
-              <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="UserImage" ColumnName="UserImage" />
                 <ScalarProperty Name="ActId" ColumnName="ActId" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Images">
-            <EntityTypeMapping TypeName="TaskModel.Images">
-              <MappingFragment StoreEntitySet="Images">
-                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ReplyId" ColumnName="ReplyId" />
+                <ScalarProperty Name="DynId" ColumnName="DynId" />
+                <ScalarProperty Name="ComId" ColumnName="ComId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

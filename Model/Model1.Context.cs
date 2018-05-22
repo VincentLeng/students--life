@@ -26,12 +26,14 @@ namespace Model
         }
     
         public virtual DbSet<Activities> Activities { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Comments> Comments { get; set; }
         public virtual DbSet<Dynamics> Dynamics { get; set; }
-        public virtual DbSet<Managers> Managers { get; set; }
-        public virtual DbSet<ReplyComments> ReplyComments { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Images> Images { get; set; }
+        public virtual DbSet<Managers> Managers { get; set; }
+        public virtual DbSet<Receive> Receive { get; set; }
+        public virtual DbSet<Reply> Reply { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

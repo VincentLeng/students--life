@@ -11,17 +11,17 @@
     <div class="soso-caro">
         <!-- 轮播项目 -->
         <div class="item active">
-            <a href="#">
+            <a href="/Activities/Index">
                 <img src="~/Images/Home/01.jpg" alt="caro-img-1">
             </a>
         </div>
         <div class="item">
-            <a href="#">
+            <a href="/Activities/Index">
                 <img src="~/Images/Home/02.jpg" alt="caro-img-2">
             </a>
         </div>
         <div class="item">
-            <a href="#">
+            <a href="/Activities/Index">
                 <img src="~/Images/Home/03.jpg" alt="caro-img-3">
             </a>
         </div>
@@ -53,7 +53,7 @@
         
         <div class="col-md-4">
             <h2 class="font-effect-shadow-multiple">兼职达人</h2>
-            @foreach (var item in Model.Users)
+            @foreach (var item in Model.Users)//var users in Model.Users,foreach遍历所要展示的属性
             {
                 <p>
                    <a href="#">@item.UserName</a>

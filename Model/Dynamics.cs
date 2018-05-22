@@ -17,7 +17,7 @@ namespace Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Dynamics()
         {
-            this.Dynamics1 = new HashSet<Dynamics>();
+            this.Comments = new HashSet<Comments>();
         }
     
         public int DynId { get; set; }
@@ -28,7 +28,7 @@ namespace Model
         public System.DateTime DynamicTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Dynamics> Dynamics1 { get; set; }
-        public virtual Dynamics Dynamics2 { get; set; }
+        public virtual ICollection<Comments> Comments { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

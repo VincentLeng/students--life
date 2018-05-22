@@ -17,7 +17,7 @@ namespace Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Activities()
         {
-            this.Activities1 = new HashSet<Activities>();
+            this.Receive = new HashSet<Receive>();
         }
     
         public int ActId { get; set; }
@@ -25,9 +25,9 @@ namespace Model
         public string ActContent { get; set; }
         public System.DateTime CreateTime { get; set; }
         public System.DateTime EndTime { get; set; }
+        public Nullable<int> CategoryId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Activities> Activities1 { get; set; }
-        public virtual Activities Activities2 { get; set; }
+        public virtual ICollection<Receive> Receive { get; set; }
     }
 }

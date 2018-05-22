@@ -14,13 +14,33 @@ namespace Model
     
     public partial class Users
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Users()
+        {
+            this.Comments = new HashSet<Comments>();
+            this.Dynamics = new HashSet<Dynamics>();
+            this.Receive = new HashSet<Receive>();
+            this.Reply = new HashSet<Reply>();
+        }
+    
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string UserPhone { get; set; }
         public string Email { get; set; }
+        public string UserImage { get; set; }
+        public Nullable<int> ActId { get; set; }
+        public Nullable<int> ReplyId { get; set; }
+        public Nullable<int> DynId { get; set; }
+        public Nullable<int> ComId { get; set; }
     
-        public virtual Users Users1 { get; set; }
-        public virtual Users Users2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comments> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Dynamics> Dynamics { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Receive> Receive { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reply> Reply { get; set; }
     }
 }

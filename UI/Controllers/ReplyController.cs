@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace UI.Controllers
 {
-    public class ReplyCommentsController : Controller
+    public class ReplyController : Controller
     {
         // GET: ReplyComments
         public ActionResult Index()

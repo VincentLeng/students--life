@@ -54,7 +54,6 @@ namespace DAL
         //删
         public abstract Expression<Func<T, int>> GetKey();
         public abstract Expression<Func<T, bool>> GetByIdKey(int id);
-
     }
 
 }
