@@ -39,3 +39,16 @@ section{
     justify-content:space-between;
      
 }
+#fenye ul{
+   list-style:none;
+   display: flex 
+}
+.pageBox li{
+    background-color:white;   
+    margin: 0 11px;
+    padding: 0 11px;
+    font:400 16px / 34px "hiragino sans gb", "microsoft yahei";
+}
+.pageBox li:hover {
+    background-color:coral;
+}
