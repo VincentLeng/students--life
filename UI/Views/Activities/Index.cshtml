@@ -1,4 +1,5 @@
-﻿@model UI.Models.ActivitiesViewModel
+﻿
+@model UI.Models.ActivitiesViewModel
 @{
     ViewBag.Title = "大学生兼职工作发布区";
 }
@@ -28,22 +29,19 @@
             </ul>
         }
     </div>
+
+    <!--分页实现方法-->
         <div id="fenye">
             <div class="pageBox">
                 <ul>
                 <li><a class="clickbutton"><span>1</span></a></li>
-                <li><a href="/#/o2/"><span>2</span></a></li>
-                <li><a href="/#/o3/"><span>3</span></a></li>
-                <li><a href="/#/o4/"><span>4</span></a></li>
-                <li><a href="/#/o5/"><span>5</span></a></li>
-                <li><a href="/#/o6/"><span>6</span></a></li>
-                <li><a href="/#/o7/"><span>7</span></a></li>
-                <li><a href="/#/o8/"><span>8</span></a></li>
-                <li><a href="/#/o9/"><span>9</span></a></li>
-                <li><a href="/#/o10/"><span>10</span></a></li>
-                <li><a href="/#/o2/" class="next"><span>下一页</span></a></li>
+               @for (int i = 2; i < 11; i++)
+               {
+                    <li>@Html.ActionLink(i.ToString(), "FenYe", new { page = i })</li>
+                }
+                    <li><a href="/#/o2/" class="next"><span>下一页</span></a></li>
                 </ul>
-            </div>
+            </div>      
         </div>
 </section>
  

@@ -11,8 +11,6 @@ namespace UI.Models
     {
         public IEnumerable<Activities> Activities { get; set; } //前面的activities是model中的     
         public IEnumerable<Categories> Categories { get; set; }
-        public IEnumerable<Images> Images { get; set;}//在兼职页面布局相应的图标以及图片
-       
-
+        public IEnumerable<Images> Images { get; set; }//在兼职页面布局相应的图标以及图片     
     }
 }
