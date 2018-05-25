@@ -3,9 +3,7 @@ using System.Web.Mvc;
 using BLL;
 using Model;
 using DAL;
-
-
-
+using System.Linq;
 
 namespace UI.Controllers
 {
@@ -14,49 +12,40 @@ namespace UI.Controllers
         ActivitiesBLL activitiesBLL = new ActivitiesBLL();
         CategoriesBLL categoriesBLL = new CategoriesBLL();
         ImagesBLL imagesBLL = new ImagesBLL();
+        static int count = 0;
+
         // GET: Activities
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
+            count = count != 0 ? count : activitiesBLL.GetDAL().GetALL().Count();
             var categories = categoriesBLL.GetDAL().GetALL();
-            var activities = activitiesBLL.GetDAL().GetList(10, 1);
+            var activitiesCount = count;
+            var activities = activitiesBLL.GetDAL().GetList(10, page);
             //一页展示10条数据，使用分页
             Models.ActivitiesViewModel acvm = new Models.ActivitiesViewModel();
-            acvm.Activities = activities;
-            acvm.Categories = categories;
+            acvm.Activities = activities.ToList();
+            acvm.Categories = categories.ToList();
+            acvm.ActivitiesCount = activitiesCount;
             return View(acvm);
         }
         //分页实现，get获取数据
-        [HttpGet]
-        public ActionResult FenYe(int page)
-        {
-            //var activities = activitiesBLL.GetDAL().GetALL();
-            //int pageNumber = page;
-            var sort1 = db.ShiType.ToList();
-            var foods = shi.GetShi();
-            if (genreInfoFrom != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                genreInfoFrom = currentFilter;
-            }
-            ViewBag.CurrentFilter = genreInfoFrom;
-            if (!String.IsNullOrEmpty(genreInfoFrom))
-            {
-                foods = foods.Where(x => x.ShiType.ShiTypeName == genreInfoFrom);
-            }
-            int pageSize = 9;
-            int pageNumber = (page ?? 1);
-            var menu = new TypeViewModels()
-            {
-                Type = sort1,
-                TypeShi = foods.ToPagedList(pageNumber, pageSize),
-            };
-            return PartialView("ShiIndex", menu);
+        //[HttpGet]
+        //public ActionResult FenYe(int page)
+        //{
+        //    //var activities = activitiesBLL.GetDAL().GetALL();
+        //    //int pageNumber = page;   
+        //    var activities = activitiesBLL.GetDAL().GetALL();
+        //    if (Content != null)
+        //    {
+        //        page = 1;
+        //    }
+        //    else
+        //    {
+                
+        //    }
+        //    return Content($"<h1>{page}</h2>");
 
-            return Content($"<h1>{page}</h2>");
-        }
+        //}
     }
         }
 

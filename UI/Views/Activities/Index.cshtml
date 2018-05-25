@@ -34,10 +34,12 @@
         <div id="fenye">
             <div class="pageBox">
                 <ul>
-                <li><a class="clickbutton"><span>1</span></a></li>
-               @for (int i = 2; i < 11; i++)
+                <li>
+                    <a class="clickbutton"><span>1</span></a>
+                </li>
+               @for (int i = 1; i <= Model.ActivitiesCount/10; i++)
                {
-                    <li>@Html.ActionLink(i.ToString(), "FenYe", new { page = i })</li>
+                    <li>@Html.ActionLink($"{ i + 1 }", "Index", new { page = i + 1 })</li>
                 }
                     <li><a href="/#/o2/" class="next"><span>下一页</span></a></li>
                 </ul>
