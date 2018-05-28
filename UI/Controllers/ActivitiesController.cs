@@ -26,6 +26,9 @@ namespace UI.Controllers
             acvm.Activities = activities.ToList();
             acvm.Categories = categories.ToList();
             acvm.ActivitiesCount = activitiesCount;
+
+            ViewBag.CurrentPageIndex = page;
+
             return View(acvm);
         }
         //分页实现，get获取数据
