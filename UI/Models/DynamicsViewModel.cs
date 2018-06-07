@@ -8,7 +8,14 @@ namespace UI.Models
 {
     public class DynamicsViewModel
     {
-        public IEnumerable<Dynamics> Dynamics { get; set; }
-        public IEnumerable<Images> Images { get; set; }    
+        public Dynamics dynamic { get; set; }
+        public Images image { get; set; }
+        public Users user { get; set; }
+    }
+
+    public class DynamicsMultiViewModel
+    {
+        public IEnumerable<DynamicsViewModel> DynamicsViewModels { get; set; }
+        public Dynamics NewDynamic { get; set; }
     }
 }

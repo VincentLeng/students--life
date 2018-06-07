@@ -16,5 +16,8 @@ namespace Model
     {
         public int ImageId { get; set; }
         public string Address { get; set; }
+        public Nullable<int> UserId { get; set; }
+    
+        public virtual Users Users { get; set; }
     }
 }

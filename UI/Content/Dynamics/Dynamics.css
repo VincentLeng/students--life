@@ -1,0 +1,38 @@
+﻿body {
+}
+section{
+    width: 74%;
+    margin: 10px auto;
+    position: relative;
+}
+section.leftbox.leftbox1.leftbox_1.page-top{
+    display: inline-block;
+    font-size: 15px;
+    height: 60px;
+    line-height: 40px;
+    margin-left: 15px;
+}
+.postsend{
+    width: 150px;  
+    /*background: #808080;*/
+    color: white;    
+    margin-right: 20px;
+    text-align:center;
+    font-size:15px;
+    margin-bottom:2px;
+}
+.postarticle{
+
+}
+#DynamicsBox ul {
+    background-color: antiquewhite;
+    margin-top: 0;
+    margin-bottom: 10px
+}
+#DynamicsBox ul li{
+    display:flex;
+    justify-content:space-between;
+    font:400 16px / 34px "hiragino sans gb", "microsoft yahei";
+    margin-top:5px;
+}
+

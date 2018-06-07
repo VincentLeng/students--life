@@ -5,6 +5,8 @@
 }
 @section styles{
     <link href="~/Content/Activities/Activities.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <style>
         .active-link {
             background-color: coral;
@@ -19,25 +21,26 @@
 {
     <ul>
     <li>
-    <a class="button-1" href="/Activities/Index">@item.CategoryName &raquo;</a>
+    <a @*class="button-1"*@ href="/Activities/Index">@item.CategoryName &raquo;</a>
     </li>
     </ul>
 }
 </div>
+
     <div id="activities-page-bottom">
         @foreach (var item in Model.Activities)
         {
             <ul>
-                <li>
-                    <a class="button-2" href="#">@item.ActContent &raquo;</a>
-                    <a class="button" href="/Home/Index"> <input type="submit" value="接取任务" style="border:0;height:54px;margin-right:15px;line-height:0;background-color:coral;"/></a>
+                <li>                 
+                    <a @*class="button-2"*@ href="#">@item.ActContent &raquo;</a>
+                    <a class="button" href="/Home/Index"> <input type="submit" value="接取任务" style="border:0;height:54px;margin-right:15px;line-height:0;background-color:coral;" /></a>
                 </li>
             </ul>
         }
     </div>
-
+    
     <!--分页实现方法-->
-        <div id="fenye">
+       <div id="fenye">
             <div class="pageBox">
                 <ul>
                     @{ 
@@ -53,7 +56,10 @@
                            }
                            else
                            {
-                                <li>@Html.ActionLink($"{ i}", "Index", new { page = i })</li>
+                                <li>
+                                @*@Ajax.ActionLink($"{i}", "index", new { page = i }, new AjaxOptions { UpdateTargetId = "activities-page-bottom" })*@
+                                @Html.ActionLink($"{ i}", "Index", new { page = i })
+                                </li>
 	                        }
                             //利用最大长度进行分页下面图标的自动设置+1，当处于最大页码数时，结尾直接没有！！！
                        }

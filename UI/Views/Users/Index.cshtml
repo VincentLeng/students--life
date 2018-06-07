@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Index</h2>
+<script src="~/ueditor/ueditor.config.js"></script>
+<script src="~/ueditor/ueditor.all.js"></script>
+<script type="text/javascript">
+    var editorOption = {
+        initialFrameWidth: 1000,
+        autoHeightEnabled: true,
+        maximumWords: 1000,
+        initialFrameHeight: 150,
+        toolbars: [['source', 'undo', 'redo', 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'date', 'time', 'link', 'unlink', 'fontfamily', 'fontsize', 'forecolor', 'simpleupload', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'inserttable', 'help', 'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify']]
+    };
+    var editor = new baidu.editor.ui.Editor(editorOption);
+    editor.render('PostCommentContent');
+</script>
+
+<div>
+    <textarea id="PostCommentContent" name="PostCommentContent" required> </textarea>
+</div>

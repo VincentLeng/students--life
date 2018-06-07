@@ -1,0 +1,59 @@
+﻿@model UI.Models.DynamicsMultiViewModel
+@{
+    ViewBag.Title = "Index";
+}
+@section styles{
+<script src="~/ueditor/ueditor.config.js"></script>
+<script src="~/ueditor/ueditor.all.js"></script>
+<link href="~/Content/Dynamics/Dynamics.css" rel="stylesheet" />
+}
+
+<section>
+    <div class="leftbox">
+        <div class="leftbox1">
+            <div class="leftbox_1">
+                <span class="page-top">当前版块：讨论区</span>              
+            </div>
+        </div>
+    </div>
+    <div id="DynamicsBox">           
+        <ul>
+   @foreach (var item in Model.DynamicsViewModels)
+   {
+            <li>
+                <img src="@item.image.Address" style="width:30px;height:30px;">
+               <a class="Button2" href="#">@item.user.UserName</a>
+               <a class="Button3" href="#">@item.dynamic.DynamicContent&raquo;</a>
+            </li>
+   }       
+        </ul>    
+        </div>
+@using (Html.BeginForm("PostSend", "Dynamics", FormMethod.Post, new { @class = "PostSendForm", enctype = "multipart/form-data" }))
+{
+    @*@Html.AntiForgeryToken()*@
+    <div class="postsend">
+        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+      <div class="postsend-top">
+        <input type="submit" value="点击发表" id="Button1" name="savee" readonly="readonly">
+      </div>
+    <div class="postarticle">
+            <script type="text/javascript">
+                var editorOption = {
+                    initialFrameWidth: 843.59,
+                    autoHeightEnabled: true,
+                    maximumWords: 1000,
+                    initialFrameHeight: 150,
+                    toolbars: [['source', 'undo', 'redo', 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'date', 'time', 'link', 'unlink', 'fontfamily', 'fontsize', 'forecolor', 'simpleupload', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'inserttable', 'help', 'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify']]
+                };
+                var editor = new baidu.editor.ui.Editor(editorOption);
+                editor.render('PostCommentContent');
+            </script>
+            <div>
+                <textarea id="PostCommentContent" name="DynamicContent" required> </textarea>
+            </div>
+        </div>
+    </div>
+}
+   
+</section>
+
