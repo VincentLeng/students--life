@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
 using Model;
+using DAL;
 
 namespace BLL
 {
-   public partial class UsersBLL:BaseBLL<Users>
+    public partial class ReceiveBLL : BaseBLL<Receive>
     {
         TaskEntities DbContext = new TaskEntities();
-        public override BaseDAL<Users> GetDAL()
-        {
-            return new UsersDAL();
-        }
 
-        
+        public override BaseDAL<Receive> GetDAL()
+        {
+            return new ReceiveDAL();
+        }
     }
 }

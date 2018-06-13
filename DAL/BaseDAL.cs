@@ -21,7 +21,6 @@ namespace DAL
                    .Skip((pageIndex - 1) * pageSize)
                    .Take(pageSize);
         }
-
         //兼职信息页的分页效果，直接return结果，查询多条兼职信息
         public T GetById(int id)
         {
@@ -31,30 +30,36 @@ namespace DAL
         }
 
         //通过id查询单条的兼职信息    
+        public IQueryable<T> GetALL()
+        {                  
+            return DbContext.Set<T>(); 
+        }
         public int Add(T t)
         {
             DbContext.Set<T>().Add(t);
             return DbContext.SaveChanges();
         }
-        //增
+        //增加
+      
         public int Update(T t)
         {
             DbContext.Set<T>().Attach(t);
             DbContext.Entry(t).State = EntityState.Modified;//设置状态为修改
             return DbContext.SaveChanges();
         }
-        //改
+        //修改
         public int Remove(int id)
         {
             var t = GetById(id);
             DbContext.Set<T>().Remove(t);
             return DbContext.SaveChanges();
         }
-        public IQueryable<T> GetALL()
-        {                  
-            return DbContext.Set<T>(); 
+        //删除
+        public Users Denglu(string UserName, string Password)
+        {
+            var users =Denglu(UserName, Password);
+            return users;
         }
-        //删
         public abstract Expression<Func<T, int>> GetKey();
         public abstract Expression<Func<T, bool>> GetByIdKey(int id);
 

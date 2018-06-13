@@ -349,6 +349,7 @@
     <Content Include="Content\carobottomcss\StyleSheet1.css" />
     <Content Include="Content\Dynamics\Dynamics.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Register.css" />
     <Content Include="Content\search\search.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -1032,6 +1033,7 @@
     <Content Include="ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="ueditor\third-party\video-js\font\vjs.woff" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

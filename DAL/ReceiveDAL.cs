@@ -8,19 +8,19 @@ using Model;
 
 namespace DAL
 {
-    public partial class UsersDAL:BaseDAL<Users>
+    public partial class ReceiveDAL:BaseDAL<Receive>
     {
         TaskEntities DbContext = new TaskEntities();
 
-        public override Expression<Func<Users, bool>> GetByIdKey(int id)
+        public override Expression<Func<Receive, bool>> GetByIdKey(int id)
         {
-            return u => u.UserId == id;
+            return u => u.ReceiveId == id;
         }
 
-        public override Expression<Func<Users, int>> GetKey()
+        public override Expression<Func<Receive, int>> GetKey()
         {
-            return u => u.UserId;
+            return u => u.ReceiveId;
         }
-       
+
     }
 }

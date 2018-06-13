@@ -40,9 +40,9 @@
             <!--导航栏部分-->
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                    <li>@Html.ActionLink("关于", "About", "Home")</li>
-                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("兼职新星", "Index", "Home")</li>
+                    <li>@Html.ActionLink("最热兼职", "Index", "Activities")</li>
+                    <li>@Html.ActionLink("兼职帮帮乐", "Index", "Dynamics")</li>
 
                     <!--搜索框-->
                     <li style="margin-right: 0px;">
@@ -67,7 +67,9 @@
                         <!--js代码实现点击搜索按钮实现搜索框弹出-->
                     </li>              
                 </ul>
-                @Html.Partial("_LoginPartial")
+                <span style="float:right;margin-top:15px">@Html.ActionLink("注册", "Register", "Users")</span>
+                &nbsp;&nbsp;&nbsp;
+                <span style="float:right;margin-top:15px">@Html.ActionLink("登录", "Login", "Users")</span>
             </div>
     </div>
     </div>
