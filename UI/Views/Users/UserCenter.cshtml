@@ -1,0 +1,49 @@
+﻿@model UI.Models.UsersViewModel
+@{
+    ViewBag.Title = "学践网-用户个人中心";
+}
+
+<section>
+
+<div class="wrap">
+        <ul class="ulmp leftnavbar"> 
+            <li>兼职订单</li>
+            <li>账户资料</li>
+        </ul>
+        <div>
+            <div class="topbar">用户资料</div>
+            <div>
+                <div>
+                    <img src="~/Images/user-head/11.jpg" style="width:50px;" />
+                    <input type="file" value="修改头像" />
+                    <button>上传头像</button>
+                </div>        
+            </div>
+        </div>
+    <div class="leftnav">   
+    </div>
+    <div class="rightdetail">
+        <div>
+            <div class="topbar">兼职订单</div>
+            <div>
+                <table>
+                    <tr>
+                        <th>订单名称</th>
+                        <th>发布日期</th>
+                        <th>订单状态</th>
+                        <th>预约人数</th>
+                    </tr>
+                    @foreach (var item in Model.Activities)
+                    {
+                        <tr>
+                            <td>@item.ActContent</td>
+                            <td>@item.CreateTime</td>
+                            <td>@item.EndTime</td>                          
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

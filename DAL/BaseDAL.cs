@@ -57,9 +57,15 @@ namespace DAL
         //删除
         public Users Denglu(string UserName, string Password)
         {
-            var users =Denglu(UserName, Password);
+            var users = DbContext.Users.Where(u => u.UserName == UserName).Where(u => u.Password == Password).FirstOrDefault();
             return users;
         }
+        public Users AddUser(Users users)
+        {
+            DbContext.Users.Add(users);
+            return users;
+        }
+
         public abstract Expression<Func<T, int>> GetKey();
         public abstract Expression<Func<T, bool>> GetByIdKey(int id);
 

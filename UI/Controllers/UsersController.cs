@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL;
+using DAL;
 using Model;
 using UI.Models;
+using UI.Attributes;
 
 namespace UI.Controllers
 {
@@ -16,6 +18,7 @@ namespace UI.Controllers
         ImagesBLL imagesBLL = new ImagesBLL();
         DynamicsBLL dynamicsBLL = new DynamicsBLL();
         ReceiveBLL receiveBLL = new ReceiveBLL();
+        ActivitiesBLL activitiesBLL = new ActivitiesBLL();
         public ActionResult Index()
         {
             return View();
@@ -31,45 +34,57 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                users.UserName = null;
-                users.Password = null;
-                users.Email= null;
-                return Content("<script>;alert('注册成功!');window.history.go(-2); window.location.reload(); </script>");
+                //users.UserName = null;
+                //users.Password = null;
+                //users.Email = null;
+                //Users  users = usersBLL.GetDAL().Add(users);
+
+                UsersBLL ii = new UsersBLL();
+                var uu = ii.GetDAL().AddUser(users);
+
+                return Content("<script>;alert('注册成功!');window.location.href='/Users/Login';</script>");
             }
             else
             {
                 return Content("<script>;alert('注册失败！');history.go(-1)</script>");
             }
         }
+        //登录
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
         [HttpPost]
-        public string Login([Bind(Include = "UserName,Password")]string UserName, string Password)
-        { 
-                var users = usersBLL.GetDAL().Denglu(UserName, Password);
-                if (users != null)
-                {
+        public ActionResult Login([Bind(Include = "UserName,Password")]string UserName, string Password)
+        {
+            var users = usersBLL.GetDAL().Denglu(UserName, Password);
+            if (users != null)
+            {
                 //保存到Session HttpContext.
-                    Session["UserId"] = users.UserId;
-                    Session["UserName"] = UserName;
-                    Session["Password"] = Password;
-                    string data = "登录成功";
-                    return data;
-                }
-                else
-                {
-                    string data = "登录失败";
-                    return data;
-                }
+                Session["UserId"] = users.UserId;
+                //Session["UserName"] = UserName;
+                //Session["Password"] = Password;
+                Session["User"] = users;
+                return Content("<script>alert('登录成功!');window.location.href='/'</script>");
             }
-
+            else
+            {
+                return Content("<script>;alert('登录失败！');history.go(-1)</script>");
+            }
+        }
+            
         //注销
-        [HttpPost]
-        public string Zhuxiao()
+        [HttpGet]
+        public ActionResult Zhuxiao()
         {
             //保存到Session HttpContext.
             Session["UserId"] = null;
-            string A = "a";
-            return A;
+            return Redirect("/users/login");
         }
+        
+        [ValidateInput(false)]
+        [Login]
 
         //个人中心页面
         public ActionResult UserCenter(int UserId)
@@ -77,7 +92,6 @@ namespace UI.Controllers
             TaskEntities DbContext = new TaskEntities();
             UsersViewModel uv = new UsersViewModel();
             int id = Convert.ToInt32(Session["UserId"]);
-            //uv.Users = 
             var users = DbContext.Users.Where(c => c.UserId == id);
             uv.Users = users;
             ViewBag.UserId = UserId;
@@ -85,7 +99,9 @@ namespace UI.Controllers
             uv.Dynamics = dynamicsBLL.GetDAL().GetList(3, 1);
             //接取的兼职
             uv.Receive = receiveBLL.GetDAL().GetList(3, 1);
+            uv.Activities = activitiesBLL.GetDAL().GetList(3, 1);
             return View(uv);
+           
         }
 
 

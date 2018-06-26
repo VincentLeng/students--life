@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -351,6 +352,7 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Register.css" />
     <Content Include="Content\search\search.css" />
+    <Content Include="Content\Users\UserCenter.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1034,6 +1036,8 @@
     <Content Include="ueditor\third-party\video-js\font\vjs.woff" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Register.cshtml" />
+    <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Views\Users\UserCenter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

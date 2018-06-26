@@ -43,16 +43,16 @@
                     <li>@Html.ActionLink("兼职新星", "Index", "Home")</li>
                     <li>@Html.ActionLink("最热兼职", "Index", "Activities")</li>
                     <li>@Html.ActionLink("兼职帮帮乐", "Index", "Dynamics")</li>
-
+                    
                     <!--搜索框-->
                     <li style="margin-right: 0px;">
                         <a href="javascript:void(0)" class="nav_search">
                             <span id="search-btn" class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                            @using (Html.BeginForm("Index","Search", FormMethod.Post, new { style = "display:inline-block;" }))
-                            {
-                                <input style="border:0;width:0;transition:width .3s;" id="search-text" type="text" name="" value="" />
-                            }
-                           <!--加入form表单，把搜索的数据传输过去-->
+                            @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { style = "display:inline-block;" }))
+            {
+                <input style="border:0;width:0;transition:width .3s;" id="search-text" type="text" name="" value="" />
+}
+                            <!--加入form表单，把搜索的数据传输过去-->
                         </a>
                         <script>
                             var searchBtn = document.getElementById('search-btn');
@@ -65,11 +65,17 @@
                             });
                         </script>
                         <!--js代码实现点击搜索按钮实现搜索框弹出-->
-                    </li>              
+                    </li>
                 </ul>
-                <span style="float:right;margin-top:15px">@Html.ActionLink("注册", "Register", "Users")</span>
-                &nbsp;&nbsp;&nbsp;
-                <span style="float:right;margin-top:15px">@Html.ActionLink("登录", "Login", "Users")</span>
+                @if (ViewBag.CurrentUser != null)
+                {
+                    <span style="float:right;margin-top:15px">@Html.Partial("_LoginPartial")</span>
+                }
+                else
+                {
+                    <span style="float:right;margin-top:15px;margin-left:15px">@Html.ActionLink("注册", "Register", "Users")</span>
+                    <span style="float:right;margin-top:15px">@Html.ActionLink("登录", "Login", "Users")</span>
+                }
             </div>
     </div>
     </div>

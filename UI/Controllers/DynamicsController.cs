@@ -51,9 +51,9 @@ namespace UI.Controllers
                 dynamic.ComId = 0;
                 dynamic.DynId = 0;
                 dynamic.DynamicContent = null;
-                if (Session["DynamicContent"] != null)
+                if (Session["UserId"] != null)
                 {
-                    dynamic.DynId = (int)Session["DynamicContent"];
+                    dynamic.DynId = (int)Session["UserId"];
                     dynamicsBLL.Update(dynamic);
                 }
                 else

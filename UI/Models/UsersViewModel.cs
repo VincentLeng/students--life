@@ -12,7 +12,6 @@ namespace UI.Models
         public IEnumerable<Images> Images { get; set; }
         public IEnumerable<Receive> Receive { get; set; }
         public IEnumerable<Dynamics> Dynamics { get; set; }
-
-
+       public IEnumerable<Activities> Activities { get;set; }
     }
 }

@@ -1,3 +1,8 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@using Model
+@{
+     ViewContext.ViewBag.CurrentUser = Session["User"] != null ? Session["User"] as Users : null;
+}
