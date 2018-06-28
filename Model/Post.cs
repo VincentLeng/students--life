@@ -12,21 +12,14 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Dynamics
+    public partial class Post
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Dynamics()
-        {
-            this.Comments = new HashSet<Comments>();
-        }
-    
-        public int DynId { get; set; }
         public int UserId { get; set; }
+        public int PostId { get; set; }
         public string DynamicContent { get; set; }
-        public System.DateTime DynamicTime { get; set; }
+        public Nullable<System.DateTime> PostTime { get; set; }
+        public string PostName { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comments> Comments { get; set; }
         public virtual Users Users { get; set; }
     }
 }

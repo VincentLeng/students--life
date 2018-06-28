@@ -20,6 +20,7 @@ namespace Model
             this.Comments = new HashSet<Comments>();
             this.Dynamics = new HashSet<Dynamics>();
             this.Images = new HashSet<Images>();
+            this.Post = new HashSet<Post>();
             this.Receive = new HashSet<Receive>();
             this.Reply = new HashSet<Reply>();
         }
@@ -29,11 +30,6 @@ namespace Model
         public string Password { get; set; }
         public string UserPhone { get; set; }
         public string Email { get; set; }
-        public Nullable<int> ImageId { get; set; }
-        public Nullable<int> ActId { get; set; }
-        public Nullable<int> ReplyId { get; set; }
-        public Nullable<int> DynId { get; set; }
-        public Nullable<int> ComId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comments> Comments { get; set; }
@@ -41,6 +37,8 @@ namespace Model
         public virtual ICollection<Dynamics> Dynamics { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Images> Images { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Post> Post { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Receive> Receive { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

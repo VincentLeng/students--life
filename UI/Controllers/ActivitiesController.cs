@@ -12,6 +12,8 @@ namespace UI.Controllers
         ActivitiesBLL activitiesBLL = new ActivitiesBLL();
         CategoriesBLL categoriesBLL = new CategoriesBLL();
         ImagesBLL imagesBLL = new ImagesBLL();
+        UsersBLL usersBLL = new UsersBLL();
+        ReceiveBLL receiveBLL = new ReceiveBLL();
         static int count = 0;
 
         // GET: Activities
@@ -26,10 +28,23 @@ namespace UI.Controllers
             acvm.Activities = activities.ToList();
             acvm.Categories = categories.ToList();
             acvm.ActivitiesCount = activitiesCount;
-
             ViewBag.CurrentPageIndex = page;
-
             return View(acvm);
+        }
+        public ActionResult getActivities(int actid)
+
+        {
+            TaskEntities DbContext = new TaskEntities();
+            //activities.Add(activities);
+            Receive receive = new Receive();
+            int id = Convert.ToInt32(Session["UserId"]);
+            receive.UserId = id;
+            receive.ReceiveTime = DateTime.Now;
+            receive.ActId = actid;
+            receiveBLL.Add(receive);
+            return Redirect(Url.Action("UserCenter","Users",new { userid=Session["UserId"]}));
+                //Content("<script>alert('预约成功！');window.open('" + Url.Content("~/Student/Index") + "', '_blank')</script>");
+
         }
         //分页实现，get获取数据
         //[HttpGet]
@@ -44,7 +59,7 @@ namespace UI.Controllers
         //    }
         //    else
         //    {
-                
+
         //    }
         //    return Content($"<h1>{page}</h2>");
 

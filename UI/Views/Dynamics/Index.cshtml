@@ -16,18 +16,19 @@
             </div>
         </div>
     </div>
-    <div id="DynamicsBox">           
-        <ul>
+    <table id="DynamicsBox">           
+        
    @foreach (var item in Model.DynamicsViewModels)
    {
-            <li>
-                <img src="@item.image.Address" style="width:30px;height:30px;">
-               <a class="Button2" href="#">@item.user.UserName</a>
-               <a class="Button3" href="#">@item.dynamic.DynamicContent&raquo;</a>
-            </li>
+            <tr>
+                <td>  <img src="@item.image.Address" style="width:30px;height:30px;"></td>
+                <td> <a class="Button2" href="#">@item.user.UserName</a></td>
+                <td> <a class="Button3" href="#">@item.dynamic.DynamicContent&raquo;</a></td>
+            
+            </tr>
    }       
-        </ul>    
-        </div>
+            
+        </table>
 @using (Html.BeginForm("PostSend", "Dynamics", FormMethod.Post, new { @class = "PostSendForm", enctype = "multipart/form-data" }))
 {
     @*@Html.AntiForgeryToken()*@

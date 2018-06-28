@@ -10,8 +10,8 @@ namespace UI.Models
     {
         public IEnumerable<Users> Users { get; set; }
         public IEnumerable<Images> Images { get; set; }
-        public IEnumerable<Receive> Receive { get; set; }
+        public IList<Receive> Receive { get; set; }
         public IEnumerable<Dynamics> Dynamics { get; set; }
-       public IEnumerable<Activities> Activities { get;set; }
+        public IEnumerable<Activities> Activities { get;set; }
     }
 }

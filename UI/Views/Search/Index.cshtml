@@ -21,7 +21,7 @@
         </a>
         @foreach (var cate in Model.Categories)
         {
-            if (cate.ActId == item.ActId)
+            if (cate.CategoryId == item.CategoryId)
             {
                 <span style="background-color:#e6e6e6;border-radius:3px;"><a style="color:black" href="#">@cate.CategoryName</a></span>
             }

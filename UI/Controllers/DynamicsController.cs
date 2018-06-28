@@ -8,14 +8,17 @@ using BLL;
 using Model;
 using UI.Models;
 using System.Text.RegularExpressions;
+using UI.Attributes;
 
 namespace UI.Controllers
 {
     public class DynamicsController : Controller
     {
+        TaskEntities DbContext = new TaskEntities();
         DynamicsBLL dynamicsBLL = new DynamicsBLL();
         ImagesBLL imagesBLL = new ImagesBLL();
         UsersBLL usersBLL = new UsersBLL();
+        PostBLL postBLL = new PostBLL();
         // GET: Dynamics
         public ActionResult Index()
         {
@@ -27,49 +30,68 @@ namespace UI.Controllers
             foreach (var dynamic in dynamics)
             {
                 var _user = usersBLL.GetDAL().GetById(dynamic.UserId);
-                var _image = imagesBLL.GetDAL().GetById(_user.ImageId.Value);
-                vmlist.Add(new DynamicsViewModel
+                var _image = _user.Images.SingleOrDefault();
+                vmlist.Add
+                (new DynamicsViewModel
                 {
                     dynamic = dynamic,
                     user = _user,
                     image = _image,
-                });
+                }
+                );
             }
 
             vm.DynamicsViewModels = vmlist;
             return View(vm);
         }
         //发帖post
+        public ActionResult Post(Post post)
+        {
+            return View();
+        }
         [HttpPost]
         [ValidateInput(false)]//udeitor附文本编辑器的使用！！！
-        public ActionResult PostSend(Dynamics dynamic)
+        [Login]
+        public ActionResult PostSend()
         {
-            if (ModelState.IsValid)
-            {
-                dynamic.DynamicTime = System.DateTime.Now;
-                dynamic.UserId = (int)Session["UserId"];
-                dynamic.ComId = 0;
-                dynamic.DynId = 0;
-                dynamic.DynamicContent = null;
-                if (Session["UserId"] != null)
-                {
-                    dynamic.DynId = (int)Session["UserId"];
-                    dynamicsBLL.Update(dynamic);
-                }
-                else
-                {
-                    dynamicsBLL.Add(dynamic);
-                }
+            //if (ModelState.IsValid)
+            //{
+            //    post.UserId = (int)Session["UserId"];
+            //    post.DynamicContent = null;
+            //    if (Session["UserId"] != null)
+            //    {
+            //        post.PostId = (int)Session["UserId"];
+            //        postBLL.Add(post);
+            //    }
+            //    else
+            //    {
+            //        postBLL.Add(post);
+            //    }
 
-                //db.Post.Add(post);
-                //db.SaveChanges();
-                //return RedirectToAction("Index");
-                return Content("<script>;alert('发布成功！');window.history.go(-2);window.location.reload();</script>");
+            //    DbContext.Post.Add(post);
+            //    DbContext.SaveChanges();
+            //    //return RedirectToAction("Index");
+            //    return Content("<script>;alert('发布成功！');window.history.go(-2);window.location.reload();</script>");
+            //}
+            //else
+            //{
+            //    return Content("<script>;alert('发布失败！');history.go(-1)</script>");
+            //}
+            var dynamics = new Dynamics();
+            int UserId = Convert.ToInt32(Session["UserId"]);
+            dynamics.DynamicContent = Request.Form["DynamicContent"];
+            if (dynamics.DynamicContent == "")
+            {
+                return Content("<script>;alert('帖子内容不能为空');window.open('" + Url.Action("Index", "Home") + "', '_self' </script>");
             }
             else
             {
-                return Content("<script>;alert('发布失败！');history.go(-1)</script>");
+                dynamics.UserId = UserId;
+                dynamics.DynamicTime = DateTime.Now;
+                var success = dynamicsBLL.GetDAL().Add(dynamics);
+                return RedirectToAction("Index");
             }
         }
     }
 }
+

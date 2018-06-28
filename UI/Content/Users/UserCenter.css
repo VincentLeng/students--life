@@ -1,5 +1,17 @@
 ﻿body {
+    background-color:aliceblue;
 }
 section{
+margin-top:20px;
 
+width:1000px;
+
+}
+.leftUserCenter{
+    
+    background-color:#ffffff;
+}
+.rightUsereCenter {
+    padding:0 0 15px;
+    background-color: #e2d2d2;
 }

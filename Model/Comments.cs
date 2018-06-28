@@ -25,7 +25,6 @@ namespace Model
         public string ComContent { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<int> DynId { get; set; }
-        public Nullable<int> ReplyId { get; set; }
     
         public virtual Dynamics Dynamics { get; set; }
         public virtual Users Users { get; set; }

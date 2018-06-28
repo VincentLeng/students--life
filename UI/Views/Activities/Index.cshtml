@@ -32,8 +32,10 @@
         {
             <ul>
                 <li>                 
-                    <a @*class="button-2"*@ href="#">@item.ActContent &raquo;</a>
-                    <a class="button" href="/Home/Index"> <input type="submit" value="接取任务" style="border:0;height:54px;margin-right:15px;line-height:0;background-color:coral;" /></a>
+                    <a @*class="button-2"*@ href="#">@item.ActContent  &raquo;</a>
+                    <a class="button" href="@Url.Action("getActivities","Activities", new{actid = @item.ActId})">
+                        <input type="submit" value="接取任务" style="border:0;height:54px;margin-right:15px;line-height:0;background-color:coral;" />
+                    </a>
                 </li>
             </ul>
         }
@@ -74,6 +76,10 @@
             </div>      
         </div>
 </section>
- 
+ <script>
+     //$(".button").click(function () {
+     //    $(".button").attr("href","")
+     //})
+ </script>
 
 

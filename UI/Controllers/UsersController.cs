@@ -98,8 +98,8 @@ namespace UI.Controllers
             //发动态
             uv.Dynamics = dynamicsBLL.GetDAL().GetList(3, 1);
             //接取的兼职
-            uv.Receive = receiveBLL.GetDAL().GetList(3, 1);
-            uv.Activities = activitiesBLL.GetDAL().GetList(3, 1);
+            var a = receiveBLL.GetDAL().getrecivebyuid(UserId);
+            uv.Receive = a;
             return View(uv);
            
         }

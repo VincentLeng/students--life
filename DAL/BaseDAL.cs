@@ -39,8 +39,11 @@ namespace DAL
             DbContext.Set<T>().Add(t);
             return DbContext.SaveChanges();
         }
+
+       
+
         //增加
-      
+
         public int Update(T t)
         {
             DbContext.Set<T>().Attach(t);
@@ -64,6 +67,16 @@ namespace DAL
         {
             DbContext.Users.Add(users);
             return users;
+        }
+        public Post AddPost(Post post)
+        {
+            DbContext.Post.Add(post);
+            return post;
+        }
+        public IList<Receive> getrecivebyuid(int UserId)
+        {
+            var r = DbContext.Receive.Where(b => b.UserId == UserId).ToList();
+            return r;
         }
 
         public abstract Expression<Func<T, int>> GetKey();

@@ -31,6 +31,7 @@ namespace Model
         public virtual DbSet<Dynamics> Dynamics { get; set; }
         public virtual DbSet<Images> Images { get; set; }
         public virtual DbSet<Managers> Managers { get; set; }
+        public virtual DbSet<Post> Post { get; set; }
         public virtual DbSet<Receive> Receive { get; set; }
         public virtual DbSet<Reply> Reply { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

@@ -14,8 +14,16 @@ namespace Model
     
     public partial class Categories
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Categories()
+        {
+            this.Activities = new HashSet<Activities>();
+        }
+    
         public int CategoryId { get; set; }
-        public int ActId { get; set; }
         public string CategoryName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Activities> Activities { get; set; }
     }
 }

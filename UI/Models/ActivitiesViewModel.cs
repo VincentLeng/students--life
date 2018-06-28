@@ -13,5 +13,6 @@ namespace UI.Models
         public IEnumerable<Categories> Categories { get; set; }
         public IEnumerable<Images> Images { get; set; }//在兼职页面布局相应的图标以及图片
         public int ActivitiesCount { get; set; }
+        public IEnumerable<Users> Users { get; set; }
     }
 }

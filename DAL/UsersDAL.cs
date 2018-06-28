@@ -21,6 +21,6 @@ namespace DAL
         {
             return u => u.UserId;
         }
-       
+        
     }
 }

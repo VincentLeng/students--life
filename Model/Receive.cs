@@ -15,9 +15,9 @@ namespace Model
     public partial class Receive
     {
         public int ReceiveId { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public int UserId { get; set; }
+        public Nullable<System.DateTime> ReceiveTime { get; set; }
         public Nullable<int> ActId { get; set; }
-        public string ReceiveContent { get; set; }
     
         public virtual Activities Activities { get; set; }
         public virtual Users Users { get; set; }

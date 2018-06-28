@@ -1,4 +1,4 @@
-﻿// 为模型“C:\Users\Vincent Leng\Desktop\students--life\Model\Model.edmx”启用了 T4 代码生成。
+﻿// 为模型“E:\学践网项目开发\students--life\Model\Model.edmx”启用了 T4 代码生成。
 // 要启用旧代码生成功能，请将“代码生成策略”设计器属性的值
 // 更改为“旧的 ObjectContext”。当在设计器中打开该模型时，此属性会出现在
 // “属性”窗口中。
